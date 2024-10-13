@@ -1,1 +1,3 @@
 # ChatApp
+
+Initializing  chat app
