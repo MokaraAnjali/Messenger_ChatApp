@@ -18,3 +18,17 @@ step2: Environment setup  and UI auth : Vscode , node js
        Routing Setup
        Table setup :npx shadcn@latest add tabs
        Button setup:npx shadcn@latest add input
+
+Step 3: Server Setup
+       * creating the server folder
+       * insitalling packages 
+              npm init --yes
+              npm i express dotenv cors cookie-parser mongoose bcrypt jsonwebtoken
+              npm i nodemon --save-dev     // here nodemon is watches for all the files in server side .
+
+
+
+
+              npm i react-lottie
+              npm i emoji-picker-react
+              npx shadcn@latest add tooltip
