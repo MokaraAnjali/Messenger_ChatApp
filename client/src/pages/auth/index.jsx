@@ -64,7 +64,7 @@ const Auth = () => {
         }
       }
     } catch (error) {
-      console.login(error);
+      console.log(error);
     }
   };
 

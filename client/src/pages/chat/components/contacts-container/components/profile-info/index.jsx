@@ -1,19 +1,34 @@
 import { useAppStore } from "@/store";
-import { HOST } from "@/utils/constants";
+import { HOST, LOGOUT_ROUTE } from "@/utils/constants";
 import { Avatar ,AvatarImage} from "@radix-ui/react-avatar";
 import { getColor } from "@/lib/utils";
 import { Tooltip,TooltipProvider,TooltipTrigger,TooltipContent } from "@radix-ui/react-tooltip";
 import { FiEdit2 } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { IoPowerSharp } from "react-icons/io5";
-import { LogOut } from "lucide-react";
+import {apiClient} from "@/lib/api-client";
 
 const ProfileInfo = () => {
-    const {userInfo} = useAppStore();
+    const {userInfo,setUserInfo} = useAppStore();
     const navigate = useNavigate();
 
     const logOut = async() =>{
 
+        try{
+
+            const response = await apiClient.post(
+                LOGOUT_ROUTE,
+                {},
+                {withCredentials : true}
+            );
+
+            if(response.status === 200){
+                navigate("/auth");
+                setUserInfo(undefined);
+            }
+        }catch(error){
+            console.log(error);
+        }
     };
     return (
         <div className="absolute bottom-0 h-16 flex items-center  justify-between px-10 w-full bg-[#2a2b33]">
@@ -40,12 +55,12 @@ const ProfileInfo = () => {
                 <div>
                     {
                         userInfo.firstName && userInfo.lastName
-                        ? `${userInfo.firstName}  ${userInfo.email}`
+                        ? `${userInfo.firstName}  ${userInfo.lastName}`
                         :""
                     }
                 </div>
             </div>
-            <div className="flex gap-5">
+            <div className="flex gap-2">
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger>

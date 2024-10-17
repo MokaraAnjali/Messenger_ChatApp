@@ -32,3 +32,10 @@ Step 3: Server Setup
               npm i react-lottie
               npm i emoji-picker-react
               npx shadcn@latest add tooltip
+
+npx shadcn@latest add dialog
+
+
+ // socket setup for both frontend and backend.
+npm i socket.io
+npm i socket.io-client    //for client
