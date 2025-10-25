@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Auth from "./pages/auth";
-import Profile from "./pages/profile";
-import Chat from "./pages/chat";
-import { useAppStore } from "./store";
-import { apiClient } from "./lib/api-client";
-import { GET_USER_INFO } from "./utils/constants";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import Profile from "@/pages/profile";
+import Chat from "@/pages/chat";
+import Auth from "@/pages/auth";
+import apiClient from "@/lib/api-client";
+import { GET_USERINFO_ROUTE } from "@/lib/constants";
+import { useAppStore } from "@/store";
 
 const PrivateRoute = ({ children }) => {
   const { userInfo } = useAppStore();
@@ -19,31 +24,28 @@ const AuthRoute = ({ children }) => {
   return isAuthenticated ? <Navigate to="/chat" /> : children;
 };
 
-const App = () => {
+function App() {
   const { userInfo, setUserInfo } = useAppStore();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const response = await apiClient.get(GET_USER_INFO, {
+        const response = await apiClient.get(GET_USERINFO_ROUTE, {
           withCredentials: true,
         });
-
-        if(response.status === 200 && response.data.id)
-        {
+        if (response.status === 200 && response.data.id) {
           setUserInfo(response.data);
-        }
-        else{
+        } else {
           setUserInfo(undefined);
         }
-      }catch (error) {
+      } catch (error) {
         setUserInfo(undefined);
-      }
-      finally{
+      } finally {
         setLoading(false);
       }
     };
+
     if (!userInfo) {
       getUserData();
     } else {
@@ -52,11 +54,11 @@ const App = () => {
   }, [userInfo, setUserInfo]);
 
   if (loading) {
-    return <div>Loading....</div>;
+    return <div>Loading...</div>; // Show a loading indicator while fetching user data
   }
 
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route
           path="/auth"
@@ -84,8 +86,8 @@ const App = () => {
         />
         <Route path="*" element={<Navigate to="/auth" />} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
-};
+}
 
 export default App;

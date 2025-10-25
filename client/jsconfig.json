@@ -1,12 +1,12 @@
 {
   "compilerOptions": {
-    // ...
-    "baseUrl": ".",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
+      "@/*": ["./src/*"]
     }
-    // ...
-  }
+  },
+  "include": ["src"]
 }
