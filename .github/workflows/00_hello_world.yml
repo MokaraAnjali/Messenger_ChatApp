@@ -1,0 +1,20 @@
+name: "00.hello work workflow"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  say-hello:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print Hello World
+        run: echo "Hello, World"
+
+      - name: Run a custom script
+        run: |
+          echo "This is a custom script"
+          mkdir -p my_directory
+          echo "Script executed successfully"
