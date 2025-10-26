@@ -39,11 +39,11 @@ const Profile = () => {
 
   const validateProfile = () => {
     if (!firstName) {
-      toast.error("First Name is Required.");
+      toast.error("First Name is Required. Please enter the valid data .");
       return false;
     }
     if (!lastName) {
-      toast.error("Last Name is Required.");
+      toast.error("Last Name is Required.Please enter the data .");
       return false;
     }
     return true;
