@@ -1,4 +1,4 @@
-name: "00.hello work workflow"
+name: "Build and Push Docker Image"
 
 on:
   push:
@@ -21,17 +21,8 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/hello-work:latest .
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/chatapp:latest .
 
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/hello-work:latest
-
-      - name: Print Hello World
-        run: echo "Hello, World"
-
-      - name: Run a custom script
-        run: |
-          echo "This is a custom script"
-          mkdir -p my_directory
-          echo "Script executed successfully"
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/chatapp:latest
